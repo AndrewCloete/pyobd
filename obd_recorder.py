@@ -51,7 +51,7 @@ class OBD_Recorder():
         print "Logging started"
         
         while 1:
-            log_string = datetime.now().total_seconds()
+            log_string = int(time.time() * 1000)
             results = {}
             for index in self.sensorlist:
                 (name, value, unit) = self.port.sensor(index)
