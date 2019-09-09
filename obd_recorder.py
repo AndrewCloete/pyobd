@@ -14,7 +14,8 @@ class OBD_Recorder():
         localtime = time.localtime(time.time())
         filename = path+"bike-"+str(localtime[0])+"-"+str(localtime[1])+"-"+str(localtime[2])+"-"+str(localtime[3])+"-"+str(localtime[4])+"-"+str(localtime[5])+".log"
         self.log_file = open(filename, "w", 128)
-        self.log_file.write("Time,RPM,MPH,Throttle,Load,Gear\n");
+        header = ",".join(log_items) + "\n"
+        self.log_file.write(header);
 
         for item in log_items:
             self.add_log_item(item)
@@ -51,7 +52,7 @@ class OBD_Recorder():
         print "Logging started"
         
         while 1:
-            log_string = int(time.time() * 1000)
+            log_string = str(int(time.time() * 1000))
             results = {}
             for index in self.sensorlist:
                 (name, value, unit) = self.port.sensor(index)
@@ -60,7 +61,7 @@ class OBD_Recorder():
 
             self.log_file.write(log_string+"\n")
                  
-logitems = ["rpm", "speed", "throttle_pos", "load"]
+logitems = ["rpm", "speed", "throttle_pos", "load", "temp", "manifold_pressure", "intake_air_temp", "maf"]
 o = OBD_Recorder('/home/pi/logs/', logitems)
 o.connect()
 if not o.is_connected():

@@ -7,7 +7,7 @@
 #Cookbook
 ```sh
 # Copy dir local to remote
-rsync -ra /home/andrew/Workspace/pyobd pi@192.168.8.119:/home/pi/
+rsync -ra /home/andrew/Workspace/pyobd pi@192.168.8.118:/home/pi/
 
 # Install screen drivers
 wget http://www.4dsystems.com.au/downloads/4DPi/All/4d-hats_4-4-34_v1.1.tar.gz
